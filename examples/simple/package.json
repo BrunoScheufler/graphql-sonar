@@ -1,0 +1,16 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-sonar": "^1.0.0-alpha.19",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "pretest": "yarn build",
+    "test": "node dist",
+    "generate": "yarn graphql-sonar --schema https://api-eu-central-1.graphcms.com/v2/cks5v2v5e0qg701xo9bnu02za/master --operations ./operations/**/*.graphql --output src/sonar.ts"
+  }
+}

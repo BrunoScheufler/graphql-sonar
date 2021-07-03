@@ -1,0 +1,7 @@
+query fetchPosts {
+  posts {
+    id
+    title
+    createdAt
+  }
+}
