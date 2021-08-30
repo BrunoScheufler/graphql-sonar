@@ -36,8 +36,15 @@ export async function performGraphQLRequest<Data>(
       body: JSON.stringify(requestBody),
     });
   } catch (err) {
+    if (err instanceof Error) {
+      throw new RequestError(
+        `Failed to initiate request: ${err.message}`,
+        requestBody.operationName
+      );
+    }
+
     throw new RequestError(
-      `Failed to initiate request: ${err.message}`,
+      `Failed to initiate request: ${err}`,
       requestBody.operationName
     );
   }
@@ -53,8 +60,15 @@ export async function performGraphQLRequest<Data>(
   try {
     body = await res.json();
   } catch (err) {
+    if (err instanceof Error) {
+      throw new RequestError(
+        `Failed to parse server response: ${err.message}`,
+        requestBody.operationName
+      );
+    }
+
     throw new RequestError(
-      `Failed to parse server response: ${err.message}`,
+      `Failed to parse server response: ${err}`,
       requestBody.operationName
     );
   }
