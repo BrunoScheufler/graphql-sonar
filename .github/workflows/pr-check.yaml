@@ -1,0 +1,21 @@
+name: Perform PR checks
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'yarn.lock'
+      - '.github/workflows/pr-check.yaml'
+jobs:
+  lint:
+    name: Run smoke check
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install
+      - name: Run smoke check
+        run: yarn smoke
